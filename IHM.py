@@ -55,6 +55,7 @@ class IHM(Frame):
 
     def button_search(self):
         print("Boutton Rechercher")
+        # Utilise la classe Traitement pour faire la recherche
         g = Traitement(self.searchd.get(), self.searchf.get(), self.searchl.get(), self.searchdo.get())
         print(g)
         g.search()
