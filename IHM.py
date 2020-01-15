@@ -1,6 +1,6 @@
+# Modules qu'on importe pour le programme. Celui-ci comprend aussi les scripts que l'on a créé
 from tkinter import *
-import csv
-from Fonctions import *
+from Fonctions import * # Pas utilisé pour le moment
 from Traitement import *
 
 
@@ -55,7 +55,6 @@ class IHM(Frame):
 
     def button_search(self):
         print("Boutton Rechercher")
-        # Récupère dans une classe les valeurs des champs pour effectuer la recherche
         g = Traitement(self.searchd.get(), self.searchf.get(), self.searchl.get(), self.searchdo.get())
         print(g)
         g.search()
