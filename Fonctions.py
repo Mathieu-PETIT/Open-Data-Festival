@@ -1,6 +1,7 @@
+# Import les fonctions de date
 from datetime import datetime
 
-# Fonction pour compter le nombre d'éléments (pas forcément utlisée mais peut servir pour des tests) 
+# Fonction pour compter le nombre d'éléments (pas forcément utlisée mais peut servir pour des tests)
 def compter_nb_elements(csvfichier):
     # On part de -1 pour ne pas compter la première qui sert pour les catégories
     elements = -1
@@ -59,8 +60,8 @@ def remplissage(test):
         return 1
     else:
         return 0
-        
-# Fonction permettant d'ouvrir un fichier csv et retourne deux valeurs         
+
+# Fonction permettant d'ouvrir un fichier csv et retourne deux valeurs
 def open_csv():
     import csv
     # csvfichier permet d'ouvrir le fichier csv /!\ il est souvent nécessaire d'utiliser le reader pour exploiter son contenu
@@ -93,3 +94,43 @@ def verif_domaine(dom):
     else:
         critere=1
     return dom1,dom2,critere
+
+def exec_recherche_int(dom):
+    # Va chercher les information
+    dom1 = verif_domaine(dom)[0]
+    dom2 = verif_domaine(dom)[1]
+    critere = verif_domaine(dom)[2]
+    test1 = "Ca tourne"
+    test2 = "Oui mais non"
+
+    print(dom1, dom2, critere)
+
+def traitement(deb,fin,lieu,critere,row,dom1,dom2):
+    print(row[12],row[13],row[1],row[2])
+    if critere == 2:
+        if row[12] == deb and row[13] == fin and row[1] == lieu and row[2] == dom1 and row[3] == dom2:
+            print("test1")
+            print(row[12], row[13], row[1], row[2], row[3])
+    elif critere == 1:
+        print(critere)
+        if row[12] == deb and row[13] == fin and row[1] == lieu and row[2] == dom1 :
+            print("test1")
+            print(row[12], row[13], row[1], row[2])
+        else:
+                print("test2")
+    else:
+        print("Chaine non présente")
+    critere = 1
+
+# Fonction effectuant la recherche 1111 qui définit tous les champs comme remplis
+def recherche_integrale(deb,fin,lieu,dom):
+    # Va chercher les informations 
+    dom1 = verif_domaine(dom)[0]
+    dom2 = verif_domaine(dom)[1]
+    critere = verif_domaine(dom)[2]
+    
+    # Vérification visuelle des paramètres
+    print(dom1, dom2, critere)
+    # Consulte le fichier csv 
+    for row in open_csv()[1]:
+        traitement(deb,fin,lieu,critere,row,dom1,dom2)
