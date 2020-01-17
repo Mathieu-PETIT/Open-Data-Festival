@@ -1,5 +1,5 @@
 class Manifestation():
-    def __init__(self,nom,code,site,date_d,date_f,com,dom):
+    def __init__(self,nom="",code="",site="",date_d="",date_f="",com="",dom=""):
         self.nom=nom
         self.code=code
         self.site=site
