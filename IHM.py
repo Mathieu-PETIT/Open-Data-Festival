@@ -1,14 +1,33 @@
 # Modules qu'on importe pour le programme. Celui-ci comprend aussi les scripts que l'on a créé
 from tkinter import *
+from tkinter import messagebox
 from Fonctions import * # Pas utilisé pour le moment
 from Traitement import *
 
+class MsgBox(Frame):
+
+    def __init__(self):
+        self.root = Tk()
+        self.root.title('Sauvegarde')
+        # Wideget
+        Label(self.root,text="Choississez dans quel format vous souhaitez enregistrer le fichier").grid(row=2)
+        Button(self.root, text='.HTML',command=self.html).grid(row=3,sticky=W)
+        Button(self.root, text='.PDF',command=self.pdf).grid(row=3)
+        Button(self.root, text='Quitter',command=self.root.destroy).grid(row=3, sticky=E)
+        self.root.mainloop()
+
+    def html(self):
+        save_html()
+
+    def pdf(self):
+        save_pdf()
+        messagebox.showinfo("Sauvegarde", "Le fichier " + nom() + " a été créé dans le répertoire courant")
 
 class IHM(Frame):
     # Les widgets seront stockés ici en tant qu'attributs de cette fenêtre
 
-    def __init__(self, fenetre, **kwargs):
-        Frame.__init__(self, fenetre, width=200, **kwargs)
+    def __init__(self,fenetre,**kwargs):
+        Frame.__init__(self,fenetre,width=200, **kwargs)
         self.pack()
 
         Frame1 = Frame(fenetre)
@@ -50,12 +69,17 @@ class IHM(Frame):
         self.button_search = Button(Frame1,text="Search",command=self.button_search)
         self.button_search.pack(side=LEFT)
 
+        # Boutton "test"
+        self.button_test = Button(Frame1, text="test")
+        self.button_test.pack(side=RIGHT, padx=5)
+
     def button_save(self):
-        print("Boutton Sauvegarder")
+        # Utilise une fonction pour enregistrer le fichier en .html
+        g=MsgBox()
 
     def button_search(self):
-        print("Boutton Rechercher")
         # Utilise la classe Traitement pour faire la recherche
         g = Traitement(self.searchd.get(), self.searchf.get(), self.searchl.get(), self.searchdo.get())
         print(g)
         g.search()
+        messagebox.showinfo("Sauvegarde", lecture_txt())
